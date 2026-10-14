@@ -1,0 +1,62 @@
+[
+  {
+    "algorithm": "ML-KEM-768",
+    "iterations": 20,
+    "median_keygen_ms": 0.2948500005004462,
+    "median_encapsulation_ms": 0.3385500003787456,
+    "median_decapsulation_ms": 0.4139000011491589,
+    "median_signing_ms": "",
+    "median_verification_ms": "",
+    "median_encryption_ms": "",
+    "median_decryption_ms": "",
+    "public_key_bytes": 1184,
+    "ciphertext_bytes": 1088,
+    "signature_bytes": "",
+    "all_success": true
+  },
+  {
+    "algorithm": "ML-DSA-65",
+    "iterations": 20,
+    "median_keygen_ms": 0.8111500010272721,
+    "median_encapsulation_ms": "",
+    "median_decapsulation_ms": "",
+    "median_signing_ms": 2.7423499996075407,
+    "median_verification_ms": 0.9679500017227838,
+    "median_encryption_ms": "",
+    "median_decryption_ms": "",
+    "public_key_bytes": 1952,
+    "ciphertext_bytes": "",
+    "signature_bytes": 3309,
+    "all_success": true
+  },
+  {
+    "algorithm": "Falcon-512",
+    "iterations": 20,
+    "median_keygen_ms": 32.980050000332994,
+    "median_encapsulation_ms": "",
+    "median_decapsulation_ms": "",
+    "median_signing_ms": 6.551950002176454,
+    "median_verification_ms": 0.3510000005917391,
+    "median_encryption_ms": "",
+    "median_decryption_ms": "",
+    "public_key_bytes": 897,
+    "ciphertext_bytes": "",
+    "signature_bytes": 656,
+    "all_success": true
+  },
+  {
+    "algorithm": "ML-KEM-768 + AES-256-GCM",
+    "iterations": 20,
+    "median_keygen_ms": "",
+    "median_encapsulation_ms": "",
+    "median_decapsulation_ms": "",
+    "median_signing_ms": "",
+    "median_verification_ms": "",
+    "median_encryption_ms": 0.003850000211969018,
+    "median_decryption_ms": 0.0024499986466253176,
+    "public_key_bytes": 1184,
+    "ciphertext_bytes": 1088,
+    "signature_bytes": "",
+    "all_success": true
+  }
+]

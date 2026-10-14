@@ -1,0 +1,5 @@
+﻿case,processor,simulation_type,physical_qubits,logical_qubits,depth,cx_count,explicit_swap_count,single_qubit_gate_count,shots,total_measurement_shots,distinct_outcomes,tvd_ideal_vs_noisy,simulation_mode
+A1,Processor A,Ideal,5,5,28,20,0,14,4096,4096,4,0.12231445,Qiskit Aer; synthetic noise from processor JSON
+A2,Processor A,Noisy,5,5,28,20,0,14,4096,4096,32,0.12231445,Qiskit Aer; synthetic noise from processor JSON
+B1,Processor B,Ideal,9,5,18,14,0,14,4096,4096,4,0.10449219,Qiskit Aer; synthetic noise from processor JSON
+B2,Processor B,Noisy,9,5,18,14,0,14,4096,4096,32,0.10449219,Qiskit Aer; synthetic noise from processor JSON

@@ -1,0 +1,5 @@
+algorithm,iterations,median_keygen_ms,median_encapsulation_ms,median_decapsulation_ms,median_signing_ms,median_verification_ms,median_encryption_ms,median_decryption_ms,public_key_bytes,ciphertext_bytes,signature_bytes,all_success
+ML-KEM-768,20,0.2948500005004462,0.3385500003787456,0.4139000011491589,,,,,1184,1088,,True
+ML-DSA-65,20,0.8111500010272721,,,2.7423499996075407,0.9679500017227838,,,1952,,3309,True
+Falcon-512,20,32.980050000332994,,,6.551950002176454,0.3510000005917391,,,897,,656,True
+ML-KEM-768 + AES-256-GCM,20,,,,,,0.003850000211969018,0.0024499986466253176,1184,1088,,True

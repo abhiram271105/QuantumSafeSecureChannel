@@ -1,0 +1,3 @@
+﻿processor,ideal_case,noisy_case,ideal_shots,noisy_shots,ideal_distinct_outcomes,noisy_distinct_outcomes,tvd_ideal_vs_noisy
+Processor A,A1,A2,4096,4096,4,32,0.12231445
+Processor B,B1,B2,4096,4096,4,32,0.10449219

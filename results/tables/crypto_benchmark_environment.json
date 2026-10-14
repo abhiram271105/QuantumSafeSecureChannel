@@ -1,0 +1,8 @@
+{
+  "host_platform": "Windows-10-10.0.26300-SP0",
+  "python_version": "3.11.3",
+  "cpu_count_logical": 16,
+  "iterations": 20,
+  "message_bytes": 55,
+  "measurement_note": "Host CPU benchmark. Does not claim execution on physical quantum hardware or on a separate constrained device."
+}

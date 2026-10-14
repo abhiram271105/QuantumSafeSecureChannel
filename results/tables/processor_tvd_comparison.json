@@ -1,0 +1,22 @@
+[
+  {
+    "processor": "Processor A",
+    "ideal_case": "A1",
+    "noisy_case": "A2",
+    "ideal_shots": 4096,
+    "noisy_shots": 4096,
+    "ideal_distinct_outcomes": 4,
+    "noisy_distinct_outcomes": 32,
+    "tvd_ideal_vs_noisy": 0.12231445
+  },
+  {
+    "processor": "Processor B",
+    "ideal_case": "B1",
+    "noisy_case": "B2",
+    "ideal_shots": 4096,
+    "noisy_shots": 4096,
+    "ideal_distinct_outcomes": 4,
+    "noisy_distinct_outcomes": 32,
+    "tvd_ideal_vs_noisy": 0.10449219
+  }
+]
