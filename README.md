@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # QFF 2026 Phase 1 — Quantum-Safe Secure Channel (PQC + Processor A/B)
 
 This repository contains two **separate, reproducible experiments** for the selected quantum-safe cryptography work:
@@ -60,3 +61,7 @@ python benchmark_crypto.py --iterations 20
 - Crypto timing is measured with `time.perf_counter`; timing results are host-dependent and are not pre-filled or fabricated.
 - Memory reporting uses Python `tracemalloc` (Python-managed allocations), not total native `liboqs` process memory. Treat it as an approximate metric.
 - SWAP metric means explicit `swap` instructions remaining in the transpiled circuit. Routing may instead be represented by additional CX gates; use CX count and depth together when interpreting routing overhead.
+=======
+# QuantumSafeSecureChannel
+Quantum-Safe Secure Channel using Post-Quantum Cryptography
+>>>>>>> ce1bb96f73cc1a4f58f066b33eefd8ea13e29ad4
