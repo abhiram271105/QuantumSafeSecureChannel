@@ -14,11 +14,6 @@ from src.visualization import (
     plot_four_case_comparison,
 )
 
-
-# ============================================================
-# PROJECT DIRECTORIES
-# ============================================================
-
 ROOT = Path(__file__).resolve().parent
 
 TABLES = ROOT / "results" / "tables"
@@ -27,23 +22,15 @@ FIGURES = ROOT / "results" / "figures"
 TABLES.mkdir(parents=True, exist_ok=True)
 FIGURES.mkdir(parents=True, exist_ok=True)
 
-
-# ============================================================
-# RUN IDEAL AND NOISY SIMULATIONS FOR ONE PROCESSOR
-# ============================================================
-
 def run_processor(processor_name, logical_circuit, case_ideal, case_noisy):
 
     config = load_processor(processor_name)
     shots = config["transpilation"]["shots"]
 
-    # Compile the same logical circuit for this processor.
     compiled = transpile_for_processor(
         logical_circuit,
         processor_name,
     )
-
-    # Collect circuit architecture metrics.
     metrics = circuit_metrics(
         compiled,
         processor_name,
@@ -52,9 +39,6 @@ def run_processor(processor_name, logical_circuit, case_ideal, case_noisy):
         config["num_qubits"],
     )
 
-    # --------------------------------------------------------
-    # IDEAL SIMULATION
-    # --------------------------------------------------------
 
     ideal_backend = AerSimulator()
 
@@ -65,10 +49,6 @@ def run_processor(processor_name, logical_circuit, case_ideal, case_noisy):
     ).result()
 
     ideal_counts = ideal_result.get_counts()
-
-    # --------------------------------------------------------
-    # NOISY SIMULATION
-    # --------------------------------------------------------
 
     noisy_backend = AerSimulator(
         noise_model=create_noise_model(processor_name),
@@ -82,9 +62,7 @@ def run_processor(processor_name, logical_circuit, case_ideal, case_noisy):
 
     noisy_counts = noisy_result.get_counts()
 
-    # --------------------------------------------------------
-    # CALCULATE IDEAL-VERSUS-NOISY TVD
-    # --------------------------------------------------------
+
 
     tvd = round(
         total_variation_distance(
@@ -95,7 +73,7 @@ def run_processor(processor_name, logical_circuit, case_ideal, case_noisy):
         8,
     )
 
-    # Shared architecture metrics.
+
     common = {
         "processor": metrics["processor"],
         "physical_qubits": metrics["physical_qubits"],
@@ -111,9 +89,7 @@ def run_processor(processor_name, logical_circuit, case_ideal, case_noisy):
         ),
     }
 
-    # --------------------------------------------------------
-    # CASE 1: IDEAL
-    # --------------------------------------------------------
+
 
     ideal_row = {
         **common,
@@ -124,9 +100,7 @@ def run_processor(processor_name, logical_circuit, case_ideal, case_noisy):
         "total_measurement_shots": sum(ideal_counts.values()),
     }
 
-    # --------------------------------------------------------
-    # CASE 2: NOISY
-    # --------------------------------------------------------
+
 
     noisy_row = {
         **common,
@@ -140,24 +114,18 @@ def run_processor(processor_name, logical_circuit, case_ideal, case_noisy):
     return ideal_row, noisy_row, compiled
 
 
-# ============================================================
-# SAVE FOUR-CASE RESULTS
-# ============================================================
+
 
 def save_results(rows):
 
-    # --------------------------------------------------------
-    # SAVE COMPLETE JSON REPORT
-    # --------------------------------------------------------
+
 
     json_path = TABLES / "processor_ab_metrics.json"
 
     with json_path.open("w", encoding="utf-8") as file:
         json.dump(rows, file, indent=2)
 
-    # --------------------------------------------------------
-    # SAVE SCALAR METRICS TO CSV
-    # --------------------------------------------------------
+
 
     csv_path = TABLES / "processor_ab_metrics.csv"
 
@@ -197,9 +165,7 @@ def save_results(rows):
                 for field in scalar_fields
             })
 
-    # --------------------------------------------------------
-    # SAVE SEPARATE IDEAL-VERSUS-NOISY COMPARISON CSV
-    # --------------------------------------------------------
+
 
     comparison_path = TABLES / "processor_tvd_comparison.csv"
 
@@ -231,7 +197,7 @@ def save_results(rows):
             if row["case"] == noisy_case
         )
 
-        # Recalculate TVD from the saved measurement counts.
+
         verified_tvd = round(
             total_variation_distance(
                 ideal_row["counts"],
@@ -266,7 +232,7 @@ def save_results(rows):
         writer.writeheader()
         writer.writerows(comparisons)
 
-    # Also save the comparison data in JSON format.
+
     comparison_json_path = TABLES / "processor_tvd_comparison.json"
 
     with comparison_json_path.open(
@@ -283,9 +249,7 @@ def save_results(rows):
     print("TVD comparison JSON:", comparison_json_path)
 
 
-# ============================================================
-# PRINT FOUR-CASE RESULTS
-# ============================================================
+
 
 def print_results(rows):
 
@@ -363,9 +327,7 @@ def print_results(rows):
         )
 
 
-# ============================================================
-# MAIN PROGRAM
-# ============================================================
+
 
 def main():
 
@@ -384,9 +346,7 @@ def main():
         ("processor_B", "B1", "B2"),
     ]
 
-    # --------------------------------------------------------
-    # RUN BOTH PROCESSORS
-    # --------------------------------------------------------
+
 
     for processor_name, ideal_case, noisy_case in processors:
 
@@ -404,7 +364,6 @@ def main():
         rows.append(ideal_row)
         rows.append(noisy_row)
 
-        # Save the compiled circuit for reproducibility.
         circuit_path = TABLES / f"{processor_name}_compiled.txt"
 
         circuit_path.write_text(
@@ -416,24 +375,19 @@ def main():
         print(f"{ideal_case}: ideal simulation completed")
         print(f"{noisy_case}: noisy simulation completed")
 
-    # --------------------------------------------------------
-    # SAVE REPORTS AND PRINT RESULTS
-    # --------------------------------------------------------
+
 
     save_results(rows)
     print_results(rows)
 
-    # --------------------------------------------------------
-    # GENERATE FIGURES
-    # --------------------------------------------------------
+
 
     print("\nGenerating figures...")
 
-    # Physical connectivity diagrams.
+
     plot_topologies()
 
-    # Compare Processor A and Processor B using one row per processor.
-    # TVD is the ideal-versus-noisy comparison for each processor.
+
     processor_rows = [
         next(row for row in rows if row["case"] == "A1"),
         next(row for row in rows if row["case"] == "B1"),
@@ -441,12 +395,10 @@ def main():
 
     plot_processor_comparison(processor_rows)
 
-    # Generate charts displaying A1, A2, B1 and B2.
+
     plot_four_case_comparison(rows)
 
-    # --------------------------------------------------------
-    # COMPLETION SUMMARY
-    # --------------------------------------------------------
+
 
     print("\n" + "=" * 68)
     print("SIMULATION COMPLETED SUCCESSFULLY")
